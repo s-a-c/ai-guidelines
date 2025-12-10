@@ -275,11 +275,11 @@ php artisan make:factory UserFactory --model=User --pest
 // routes/web.php - Enhanced with 2FA awareness
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::redirect('settings', 'settings/profile');
-    
-    Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
-    Volt::route('settings/password', 'settings.password')->name('settings.password');
-    Volt::route('settings/two-factor', 'settings.two-factor')->name('settings.two-factor');
-    Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+
+    Route::get('settings/profile', 'settings.profile')->name('settings.profile');
+    Route::get('settings/password', 'settings.password')->name('settings.password');
+    Route::get('settings/two-factor', 'settings.two-factor')->name('settings.two-factor');
+    Route::get('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 ```
 
@@ -1719,4 +1719,4 @@ php artisan tinker
 ---
 
 **Navigation Footer**:
-← [Previous: Testing Implementation](030-laravel-fortify.md#testing-implementation) | [Next: Index →](.ai/010-docs/020-2fa-implementation/)
+← [Previous: Testing Implementation](030-laravel-fortify.md#testing-implementation) | [Next: Index →](../../.ai/010-docs/020-2fa-implementation/)

@@ -83,11 +83,11 @@ Implementation details for Pest v4
 
 ---
 
-Here is a minimal, concrete procedure to set or update the “orchestration requirement” so every AI task loads and enforces [.ai/guidelines.md](.ai/guidelines.md) and [.ai/guidelines/](.ai/guidelines/:1).
+Here is a minimal, concrete procedure to set or update the “orchestration requirement” so every AI task loads and enforces [.ai/guidelines.md](../../.ai/guidelines.md) and [.ai/guidelines/](../../.ai/guidelines/:1).
 
 1) Add a canonical orchestration policy file
 - Create .ai/orchestration-policy.md with the following required sections:
-  - Policy Context Source: paths to [.ai/guidelines.md](.ai/guidelines.md) and [.ai/guidelines/](.ai/guidelines/:1)
+  - Policy Context Source: paths to [.ai/guidelines.md](../../.ai/guidelines.md) and [.ai/guidelines/](../../.ai/guidelines/:1)
   - Enforcement Rules: MUST load guidelines before any action; MUST refuse if unreadable; MUST include Policy Acknowledgement in first response; MUST cite rule references for sensitive actions; MUST re-acknowledge when guidelines change.
   - Audit Fields: last-modified timestamps, checksum requirement, rule IDs format.
 - Keep this file versioned and change-controlled. Treat it as the single source of truth for orchestration behavior.
@@ -95,7 +95,7 @@ Here is a minimal, concrete procedure to set or update the “orchestration requ
 2) Update task templates to inject “Policy Context” and require “Policy Acknowledgement”
 - In your orchestration layer (the component that calls new_task), prepend each task’s message with:
   - Policy Context:
-    - Guidelines: [.ai/guidelines.md](.ai/guidelines.md), [.ai/guidelines/](.ai/guidelines/:1)
+    - Guidelines: [.ai/guidelines.md](../../.ai/guidelines.md), [.ai/guidelines/](../../.ai/guidelines/:1)
     - Last-modified timestamps (read from filesystem)
     - Optional checksum (e.g., SHA-256 of concatenated files)
     - Any project overrides
@@ -105,13 +105,13 @@ Here is a minimal, concrete procedure to set or update the “orchestration requ
 
 3) Add pre-commit and CI enforcement
 - Implement scripts/policy-check.php that:
-  - Reads [.ai/guidelines.md](.ai/guidelines.md) and every file under [.ai/guidelines/](.ai/guidelines/:1)
+  - Reads [.ai/guidelines.md](../../.ai/guidelines.md) and every file under [.ai/guidelines/](../../.ai/guidelines/:1)
   - Validates:
     - File placement and naming rules
     - Commit message policy (if defined)
     - Security redaction rules (no tokens/keys)
     - Required headers in AI-authored artifacts (e.g., “Compliant with guidelines v<checksum>”)
-  - Prints actionable errors with clickable rule references like [.ai/guidelines/security.md](.ai/guidelines/security.md:42)
+  - Prints actionable errors with clickable rule references like [.ai/guidelines/security.md](../../.ai/guidelines/security.md:42)
   - Exits non-zero on violations
 - Wire into:
   - .pre-commit-config.yaml (pre-commit hook) to block local commits
@@ -133,15 +133,15 @@ Here is a minimal, concrete procedure to set or update the “orchestration requ
 - This forces visible, auditable application of the policy.
 
 6) Handle updates cleanly
-- Maintain [.ai/guidelines/CHANGELOG.md](.ai/guidelines/CHANGELOG.md)
+- Maintain [.ai/guidelines/CHANGELOG.md](../../.ai/guidelines/CHANGELOG.md)
 - In orchestration:
   - Compare previous checksum to current
   - If changed during an active task, inject a “Policy Update Detected” block and require agent re-acknowledgement before proceeding
 
 7) Minimal patch you can apply now
 - Create:
-  - [.ai/orchestration-policy.md](.ai/orchestration-policy.md)
-  - [.ai/guidelines/CHANGELOG.md](.ai/guidelines/CHANGELOG.md)
+  - [.ai/orchestration-policy.md](../../.ai/orchestration-policy.md)
+  - [.ai/guidelines/CHANGELOG.md](../../.ai/guidelines/CHANGELOG.md)
   - [scripts/policy-check.php](scripts/policy-check.php)
   - [tests/Support/Helpers/GuidelineLoader.php](tests/Support/Helpers/GuidelineLoader.php)
 - Update:

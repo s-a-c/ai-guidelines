@@ -81,42 +81,42 @@ return [
 use Livewire\Volt\Volt;
 
 // Dashboard
-Volt::route('/', 'dashboard.index')->name('dashboard');
+Route::get('/', 'dashboard.index')->name('dashboard');
 
 // Artist Routes
 Route::prefix('artists')->name('artists.')->group(function () {
-    Volt::route('/', 'artists.index')->name('index');
-    Volt::route('/create', 'artists.create')->name('create');
-    Volt::route('/{artist:slug}', 'artists.show')->name('show');
-    Volt::route('/{artist:slug}/edit', 'artists.edit')->name('edit');
+    Route::get('/', 'artists.index')->name('index');
+    Route::get('/create', 'artists.create')->name('create');
+    Route::get('/{artist:slug}', 'artists.show')->name('show');
+    Route::get('/{artist:slug}/edit', 'artists.edit')->name('edit');
 });
 
 // Album Routes
 Route::prefix('albums')->name('albums.')->group(function () {
-    Volt::route('/', 'albums.index')->name('index');
-    Volt::route('/create', 'albums.create')->name('create');
-    Volt::route('/{album:slug}', 'albums.show')->name('show');
-    Volt::route('/{album:slug}/edit', 'albums.edit')->name('edit');
+    Route::get('/', 'albums.index')->name('index');
+    Route::get('/create', 'albums.create')->name('create');
+    Route::get('/{album:slug}', 'albums.show')->name('show');
+    Route::get('/{album:slug}/edit', 'albums.edit')->name('edit');
 });
 
 // Track Routes
 Route::prefix('tracks')->name('tracks.')->group(function () {
-    Volt::route('/', 'tracks.index')->name('index');
-    Volt::route('/{track:slug}', 'tracks.show')->name('show');
+    Route::get('/', 'tracks.index')->name('index');
+    Route::get('/{track:slug}', 'tracks.show')->name('show');
 });
 
 // Taxonomy Browse Routes
 Route::prefix('browse')->name('browse.')->group(function () {
-    Volt::route('/taxonomies', 'browse.taxonomies')->name('taxonomies');
-    Volt::route('/taxonomy/{taxonomy:slug}', 'browse.taxonomy')->name('taxonomy');
-    Volt::route('/genre/{taxonomy:slug}', 'browse.genre')->name('genre');
+    Route::get('/taxonomies', 'browse.taxonomies')->name('taxonomies');
+    Route::get('/taxonomy/{taxonomy:slug}', 'browse.taxonomy')->name('taxonomy');
+    Route::get('/genre/{taxonomy:slug}', 'browse.genre')->name('genre');
 });
 
 // Playlist Routes
 Route::prefix('playlists')->name('playlists.')->group(function () {
-    Volt::route('/', 'playlists.index')->name('index');
-    Volt::route('/create', 'playlists.create')->name('create');
-    Volt::route('/{playlist:slug}', 'playlists.show')->name('show');
+    Route::get('/', 'playlists.index')->name('index');
+    Route::get('/create', 'playlists.create')->name('create');
+    Route::get('/{playlist:slug}', 'playlists.show')->name('show');
 });
 ```
 

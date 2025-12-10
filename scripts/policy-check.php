@@ -12,11 +12,11 @@ declare(strict_types=1);
  * Clickable references use [path](path:line) format as requested.
  *
  * Responsibilities:
- * - Load .ai/guidelines.md and all files under .ai/guidelines/**
+ * - Load .ai/AI-GUIDELINES.md and all files under .ai/AI-GUIDELINES/**
  * - Build composite checksum (sha256) in deterministic order
  * - Track last modified times
  * - Validate AI-authored file headers:
- *     “Compliant with [.ai/guidelines.md](.ai/guidelines.md) v<checksum>”
+ *     "Compliant with [.ai/AI-GUIDELINES.md](../../.ai/AI-GUIDELINES.md) v<checksum>"
  * - Detect forbidden content (e.g., api_key, token, password, bearer)
  * - Optional path policy (allow/deny) hooks
  * - Optional commit message validation when .git is present (skip gracefully if absent)
@@ -163,9 +163,9 @@ final class JsonStore
 
 final class GuidelineLoaderInline
 {
-    private string $masterPath = '.ai/guidelines.md';
+    private string $masterPath = '.ai/AI-GUIDELINES.md';
 
-    private string $modulesDir = '.ai/guidelines';
+    private string $modulesDir = '.ai/AI-GUIDELINES';
 
     /** @var list<string> */
     private array $paths = [];
@@ -313,7 +313,7 @@ final class GuidelineLoaderInline
 
 final class PolicyCheck
 {
-    private const REQUIRED_HEADER_PREFIX = 'Compliant with [.ai/guidelines.md](.ai/guidelines.md) v';
+    private const REQUIRED_HEADER_PREFIX = 'Compliant with [.ai/AI-GUIDELINES.md](../../.ai/AI-GUIDELINES.md) v';
 
     private bool $strict;
 
@@ -355,7 +355,7 @@ final class PolicyCheck
         if ($this->strict && $prevChecksum !== '' && $prevChecksum !== $checksum) {
             $this->violations[] = 'Drift detected: guidelines checksum changed without re-acknowledgement. '
                 . 'Previous=' . $prevChecksum . ' Current=' . $checksum
-                . ' (rule [.ai/orchestration-policy.md](.ai/orchestration-policy.md:1))';
+                . ' (rule [.ai/AI-GUIDELINES.md#44-drift-detection](../../.ai/AI-GUIDELINES.md#44-drift-detection))';
         }
 
         // Scan candidate files
@@ -445,7 +445,7 @@ final class PolicyCheck
     /**
      * Header requirement:
      * File must contain the exact header line (anywhere):
-     *   Compliant with [.ai/guidelines.md](.ai/guidelines.md) v<checksum>
+     *   Compliant with [.ai/AI-GUIDELINES.md](../../.ai/AI-GUIDELINES.md) v<checksum>
      *
      * Applies to AI-authored files. Heuristic: we enforce on files under tests/Support/Helpers/, scripts/, docs/,
      * .github/workflows/, and any markdown or PHP files modified.
@@ -474,12 +474,12 @@ final class PolicyCheck
 
             if (! str_contains($content, $required)) {
                 // Allow root guidelines themselves not to require self-ack
-                if ($f === '.ai/guidelines.md' || str_starts_with($f, '.ai/guidelines/')) {
+                if ($f === '.ai/AI-GUIDELINES.md' || str_starts_with($f, '.ai/AI-GUIDELINES/')) {
                     continue;
                 }
                 $this->violations[] =
                     "Missing acknowledgement header in {$this->link($f, 1)} " .
-                    "(expected “{$required}”) (rule [.ai/orchestration-policy.md](.ai/orchestration-policy.md:20))";
+                    "(expected “{$required}”) (rule [.ai/AI-GUIDELINES.md#42-policy-acknowledgement](../../.ai/AI-GUIDELINES.md#42-policy-acknowledgement))";
             }
         }
     }
@@ -510,7 +510,7 @@ final class PolicyCheck
                 foreach ($patterns as $rx) {
                     if (preg_match($rx, $line)) {
                         // Try map to a guideline rule (security). We cite a default file/line if unknown.
-                        $ruleRef = $this->findRuleRef('security') ?? ['.ai/guidelines/security.md', 42];
+                        $ruleRef = $this->findRuleRef('security') ?? ['.ai/AI-GUIDELINES/PHP-Laravel/040-security-standards.md', 41];
                         $this->violations[] =
                             "Secret-like token found in {$this->link($f, $idx + 1)} " .
                             "(rule [{$ruleRef[0]}]({$ruleRef[0]}:{$ruleRef[1]}))";
@@ -533,7 +533,7 @@ final class PolicyCheck
             if (str_starts_with($f, 'tests/Support/Fixtures/') && preg_match('/\.secrets?\./i', $f)) {
                 $this->violations[] =
                     "Path policy violation: disallowed file {$this->link($f, 1)} " .
-                    '(rule [.ai/guidelines/path-policy.md](.ai/guidelines/path-policy.md:10))';
+                    '(rule [.ai/AI-GUIDELINES.md](../../.ai/AI-GUIDELINES.md))';
             }
         }
     }
@@ -559,7 +559,7 @@ final class PolicyCheck
         // Tolerant check: if strict, require presence of "guidelines v<hex>" mention
         if ($this->strict && ! preg_match('/guidelines\s+v[0-9a-f]{40,64}/i', $head)) {
             $this->warnings[] = 'Commit message does not mention current guidelines checksum '
-                . '(rule [.ai/orchestration-policy.md](.ai/orchestration-policy.md:36))';
+                . '(rule [.ai/AI-GUIDELINES.md#42-policy-acknowledgement](../../.ai/AI-GUIDELINES.md#42-policy-acknowledgement))';
         }
     }
 
