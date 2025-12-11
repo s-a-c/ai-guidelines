@@ -2,16 +2,16 @@
 
 ## Your Current MCP Config File
 ```
-/Users/s-a-c/dotfiles/dot-config/mcp/config.json
+/Users/s-a-c/.config/mcp/config.json
 ```
 
 ## How to Access
 ```bash
 # View the file
-cat /Users/s-a-c/dotfiles/dot-config/mcp/config.json
+cat /Users/s-a-c/.config/mcp/config.json
 
 # Edit the file
-code /Users/s-a-c/dotfiles/dot-config/mcp/config.json
+code /Users/s-a-c/.config/mcp/config.json
 ```
 
 ## Standard Locations

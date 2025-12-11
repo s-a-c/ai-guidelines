@@ -222,7 +222,7 @@ When using `process-task-list.mdc`, implement one sub-task at a time and wait fo
 ### 5.4. Orchestration Policy
 AI-authored artifacts should include compliance acknowledgment:
 ```markdown
-Compliant with AI-GUIDELINES.md v<checksum>
+Compliant with AGENTS.md v<checksum>
 ```
 
 ### 5.5. Laravel Development Standards
@@ -264,7 +264,7 @@ cd tools/validate-links && ./validate-links ../../ --fix --dry-run
 ```
 
 **Key files to review**:
-- `AI-GUIDELINES.md` - Comprehensive development standards
+- `AGENTS.md` - Comprehensive development standards
 - `README.md` - Repository overview and workflow explanation
 - `guides/DOCUMENTATION_STYLE_GUIDE.md` - Documentation formatting rules
 - `AI-GUIDELINES/000-index.md` - Guidelines index

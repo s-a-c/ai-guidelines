@@ -95,14 +95,14 @@ This policy defines the technical requirements for how an AI agent must interact
 
 **Requirement**: Agents MUST load:
 
-- This document ([AI-GUIDELINES.md](AI-GUIDELINES.md))
+- This document ([AGENTS.md](AGENTS.md))
 - All files within the `AI-GUIDELINES/` directory
 
 **Computed Context**: Agents MUST compute and expose in their context:
 
 - `guidelinesChecksum`: SHA256 hash over ordered concatenation of all guideline sources
 - `lastModified`:
-  - Master: modification time of [AI-GUIDELINES.md](AI-GUIDELINES.md)
+  - Master: modification time of [AGENTS.md](AGENTS.md)
   - Modules: maximum modification time across all files in `AI-GUIDELINES/`
 - `guidelinesPaths`: Complete list of included files
 
@@ -111,14 +111,14 @@ This policy defines the technical requirements for how an AI agent must interact
 ### 4.2. Policy Acknowledgement
 
 **Requirement**: All AI-authored artifacts (files, commit messages, documentation, etc.) MUST include an acknowledgment header:
-> "Compliant with [AI-GUIDELINES.md](AI-GUIDELINES.md) v<checksum>"
+> "Compliant with [AGENTS.md](AGENTS.md) v<checksum>"
 
 The checksum MUST match the current composite checksum at the time of authoring.
 
 **Example Header Format**:
 
 ```markdown
-Compliant with [AI-GUIDELINES.md](AI-GUIDELINES.md) v<computed at runtime by ./scripts/policy-check.php>
+Compliant with [AGENTS.md](AGENTS.md) v<computed at runtime by ./scripts/policy-check.php>
 ```
 
 ### 4.3. Sensitive Actions Rule Citation
@@ -201,18 +201,18 @@ Please refer to the `README.md` file within each subdirectory for a detailed ind
 
 ## 7. Relationship to AGENTS.md
 
-This document (AI-GUIDELINES.md) provides comprehensive development standards, security principles, and orchestration policies. For Laravel Boost-specific workflow guidelines, tool usage, and framework-specific conventions, refer to **[AGENTS.md](../AGENTS.md)**.
+This document (AGENTS.md) provides comprehensive development standards, security principles, and orchestration policies. For Laravel Boost-specific workflow guidelines, tool usage, and framework-specific conventions, refer to **[AGENTS.md](../AGENTS.md)**.
 
 **Document Hierarchy:**
 
 - **[AGENTS.md](../AGENTS.md)**: Laravel Boost workflow guidelines, tool usage, and framework-specific conventions
-- **[AI-GUIDELINES.md](AI-GUIDELINES.md)**: Comprehensive development standards, security principles, and orchestration policies
+- **[AGENTS.md](AGENTS.md)**: Comprehensive development standards, security principles, and orchestration policies
 - **[AI-GUIDELINES/](AI-GUIDELINES/)**: Detailed, technology-specific implementation guides
 
 When working with Laravel projects, both documents should be consulted:
 
 1. Start with **AGENTS.md** for Laravel Boost tool usage and workflow patterns
-2. Reference **AI-GUIDELINES.md** for comprehensive development standards and decision-making protocols
+2. Reference **AGENTS.md** for comprehensive development standards and decision-making protocols
 3. Use **AI-GUIDELINES/PHP-Laravel/** for detailed implementation guides
 
-***Navigation*** [← AGENTS](../AGENTS.md) | [↑ Top](#ai-guidelines) | [AI Guidelines →](AI-GUIDELINES/000-index.md)
+***Navigation*** [↑ Top](#ai-guidelines) | [AI Guidelines →](AI-GUIDELINES/000-index.md)
